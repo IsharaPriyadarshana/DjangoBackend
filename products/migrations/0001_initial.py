@@ -20,6 +20,5 @@ class Migration(migrations.Migration):
                 ('longDesc', models.TextField(default='This contains a detailed description of the product')),
                 ('price', models.FloatField()),
             ],
-        ),
-        migrations.RunSQL("INSERT INTO products_product (name, desc, price) VALUES('Tyres', 'Vulcanized car tyres', 300)")
+        )
     ]
