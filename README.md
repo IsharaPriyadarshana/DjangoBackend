@@ -30,7 +30,7 @@ Follow the below procedure the start the server <br><br>
 * git
 * docker
 --------------------------------------------
-* Checkout the codebase from github by,
-
+* Checkout the codebase from github by, <br>
+`git clone -b main https://github.com/IsharaPriyadarshana/DjangoBackend.git`
 * run the following command <br> `docker-compose up`  (Will take a few minutes depending on PC)
 
