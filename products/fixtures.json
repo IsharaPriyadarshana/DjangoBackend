@@ -1,0 +1,33 @@
+[
+    {
+      "model": "products.Product",
+      "pk": 1,
+      "fields": {
+        "name": "Tyres",
+        "desc": "Vulcanized Car Tyres",
+        "longDesc" : "This field will hold a full specification about the product",
+        "price" : 300
+      }
+    },
+    {
+        "model": "products.Product",
+        "pk": 2,
+        "fields": {
+          "name": "Mirrors",
+          "desc": "Power mirrors for cars",
+          "longDesc" : "This field will hold a full specification about the product",
+          "price" : 75
+        }
+      },
+      {
+        "model": "products.Product",
+        "pk": 3,
+        "fields": {
+          "name": "Mats",
+          "desc": "Rubber mats for floor",
+          "longDesc" : "This field will hold a full specification about the product",
+          "price" : 23
+        }
+      }
+    
+  ]

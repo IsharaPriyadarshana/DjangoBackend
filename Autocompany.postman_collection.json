@@ -1,0 +1,407 @@
+{
+	"info": {
+		"_postman_id": "aba1931a-f484-4dbe-a8c6-7989852d29a6",
+		"name": "Autocompany",
+		"description": "This collections brings APIs for a ecommerce website called \"autocompany\" for add products, add to cart, place orders etc.\n\nAPIs with access to super users only:\n\n\\* Add products  \n\\* View Orders\n\nSuper user with following credentials are already created.\n\n\\* username : \"admin\"  \n\\* password : \"1234\"\n\nPlease first login as a user to use the APIs. (This uses a token based authentication system and the token will be automatically applied for the rest of the APIs once logged in. You must use the same environment **Autocompany** for all the APIs)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23587941"
+	},
+	"item": [
+		{
+			"name": "User Register, Login and Logout",
+			"item": [
+				{
+					"name": "Register a user (all users including anonymous users)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code == 201){\r",
+									"    pm.environment.set(\"token\", pm.response.json().token)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"sheldon\",\r\n    \"password\" : \"1234\",\r\n    \"email\" : \"sheldon@autocompany.com\",\r\n    \"first_name\" : \"Sheldon\",\r\n    \"last_name\" : \"Cooper\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/accounts/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"accounts",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login (all users including anonymous users)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code == 200){\r",
+									"    pm.environment.set(\"token\", pm.response.json().token)\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"sheldon\",\r\n    \"password\" : \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/accounts/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout (Logged in users)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/accounts/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"accounts",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Basic APIs for Register, Login and Logout are provided.\n\nRegister and Login can be used by anonymous users as well."
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Add a product (Only Admin users)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Wheels\",\r\n    \"desc\" : \"Anto corrosive alloy wheels\",\r\n    \"price\" : 750\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/products/add",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"products",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View all products (All logged in users)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/products/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Full Description on one product (All logged in users)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/products/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "APIs related to Add product, view all products and view a full specification on a product are given.\n\n**Note:** API to add products are only to be used by super users.\n\nSuper user with following credentials are already created. Login to user the API.\n\n\\* username : \"admin\"  \n\\* password : \"1234\""
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Add product to cart (All logged in users)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_id\" : \"1\",\r\n    \"count\" : 3\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/cart/add",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"cart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Cart (All logged in users)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/cart/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove item from cart (All logged in users)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/cart/remove/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"cart",
+								"remove",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order current cart (All logged in users)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deliver_datetime\" : \"27/10/22 05:23\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/cart/order",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"cart",
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Cart related APIs are documented.\n\n\\*   Add a product to the cart\n\\*   View the current cart\n\\*   Remove an item from the cart (CartItem id should be given in the URL)\n\\*   Order the current cart"
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "View Orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/orders/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "View all the orders placed by the users with the delivery dates and items ordered.\n\n**Note:** This API only to be used by super users.\n\nSuper user with following credentials are already created. Login to user the API.\n\n\\* username : \"admin\"  \n\\* password : \"1234\""
+		}
+	]
+}
