@@ -6,7 +6,7 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=autocompany
+      - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
     healthcheck:
@@ -28,7 +28,7 @@ services:
     ports:
       - "80:80"
     environment:
-      - POSTGRES_NAME=autocompany
+      - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
       - DJANGO_SUPERUSER_PASSWORD=1234
