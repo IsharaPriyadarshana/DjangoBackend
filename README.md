@@ -28,7 +28,7 @@ How to run the server
 Follow the below procedure the start the server <br><br>
 **prerequisites:**
 * git
-* docker
+* docker compose
 --------------------------------------------
 * Checkout the codebase from github by, <br>
 `git clone -b main https://github.com/IsharaPriyadarshana/DjangoBackend.git`
