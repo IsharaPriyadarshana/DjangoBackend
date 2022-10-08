@@ -1,5 +1,9 @@
 version: "3.9"
-   
+
+networks:
+  django-backend:
+    driver: bridge
+
 services:
   db:
     image: postgres
@@ -11,14 +15,15 @@ services:
       - POSTGRES_PASSWORD=1234
     healthcheck:
           test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
+    networks:
+      - django-backend
   web:
     build:
       dockerfile: Dockerfile
       context: .
     # command: uwsgi --http :80 --processes 2 --static-map /static=/static --module autocompany.wsgi:application
     command: >
-      sh -c "python manage.py collectstatic --noinput &&
-             python manage.py migrate &&
+      sh -c "python manage.py migrate &&
              python manage.py  flush --no-input &&
              python manage.py createsuperuser --noinput --username admin --email admin@autocompany.com &&
              python manage.py loaddata products/fixtures.json --app products.Product &&
@@ -35,3 +40,5 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - django-backend
